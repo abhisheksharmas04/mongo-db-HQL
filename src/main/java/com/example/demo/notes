@@ -1,0 +1,32 @@
+-> Mongo templeate is given based on TemplateMethod design pattern. That says I take care of common logics and 
+you just perform specific logics development
+
+-> This is very much similar working with JDBC Template, Hibernate Template, JNDI Template.
+
+-> if the persistance operations are simple then perfer using mongo repository style persistance logic.
+-> if the persistance operations are complex then perfer using Mongo Template style persistance logic.
+
+-> NOTE:: If needed we can place both styles of persistance logic in application.
+
+-> NOTE:: Performing bulk non-select operations is bit complex using MongoRepository that is very much simplified in 
+Mongo Template.
+
+-> Working with complex query is bit difficult in MongoRepository that process is simplified in Mongo Template.
+
+-> if we add Spring-boot-mongodb-starter to the project the mongo template object will come automatically as spring
+bean through autoconfiguration. This object can be injected through ServiceImpl class in order to use them for persistance
+operation.
+
+-> NOTE:: MongoTemplate provides both direct method and methods with callback interfaces in order to perform persistance
+operation.
+
+-> Callback interfaces provide callback methods allowing us to write logics directly in native api like JDBC API,
+Mongo Api, Hibernate Api by using container supplied readymate object.
+
+-> NOTE:: While working with MongoTemplate there is no need of taking MongoRepository.
+
+--> Difference between insert(-) and save(-) method of MongoTemplate
+	-> insert() method support insert document operation where save() method support both insert, update
+	document operation.
+	-> insert() method suport bulk/batch insertion by taking collection of Document class object where as save() method
+	does not support the same.
