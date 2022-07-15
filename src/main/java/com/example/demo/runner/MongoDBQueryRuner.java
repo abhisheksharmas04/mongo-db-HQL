@@ -14,15 +14,8 @@ public class MongoDBQueryRuner implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		// invoke Methods:
-		/*service.fetchCustomersDataByAddress("Jpr").forEach(doc ->{
-			for(Object att:doc) {
-				System.out.print(att);
-			}
-			System.out.println();
-		});*/
-		
-		service.fetchCustomerByCadd("Jpr").forEach(System.out::println);
+//		System.out.println(service.fetchCUstomerByRegCadd("d$"));
+		System.out.println(service.fetchCustomerByBillAmountRange(100.0, 1000.0));
 	}
 
 }

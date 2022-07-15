@@ -15,13 +15,13 @@ public class CustomerManagementServiceImpl implements ICustomerManagementService
 	private ICustomerRepo repo;
 
 	@Override
-	public List<Object[]> fetchCustomersDataByAddress(String address) {
-		return repo.getCustomerData(address);
+	public List<Customer> fetchCUstomerByRegCadd(String cadd) {
+		return repo.getCustomerByRegCadd(cadd);
 	}
-
+	
 	@Override
-	public List<Customer> fetchCustomerByCadd(String address) {
-		return repo.getCustomerByCadd(address);
+	public int fetchCustomerByBillAmountRange(Double start, Double end) {
+		return repo.getCustomersCountByBillAmountRange(start, end);
 	}
 
 }

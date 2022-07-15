@@ -8,19 +8,29 @@ import org.springframework.data.mongodb.repository.Query;
 import com.example.demo.document.Customer;
 
 public interface ICustomerRepo extends MongoRepository<Customer, String> {
+	//
+	@Query(value = "{cadd:{$regex:?0}}")
+	public List<Customer> getCustomerByRegCadd(String add);
 	
-	@Query(fields = "{cno:1,cname:1,cadd:1}", value = "{cadd:?0}")
-	public List<Object[]>getCustomerData(String cadd);
+	@Query(value = "{billAmt:{$gte:?0,$lte:?1}}",count = true)
+	public int getCustomersCountByBillAmountRange(Double start, Double end);
 	
-	@Query(fields = "{}", value = "{cadd:?0}") // Empty flower bracks is suffficent to get all the fields
-	public List<Customer>getCustomerByCadd(String add);
+	@Query(value = "{}",sort = "{billAmt:-1}")
+	public List<Customer>getCustomersByBillAmountSorted();
 	
-	@Query(fields = "{id:1, cno:1, cname:1, cadd:1}", value = "{$or:[{cadd:?0},{cname:?1}]}")
-	public List<Object[]>getCustomerByCaddOrName(String add, String name);
+	@Query(value = "{billAmt:null}",delete = true)
+	public int deleteCustomerWithNoBillAmt();
 	
-	@Query(fields = "{id:1, cno:1, cname:1, cadd:1}", value = "{billAmt:{$gt:?0},billAmt:{$lt:?1}}")
-	public List<Object[]>getCustomerByBillAmounthRange(Double start, Double end);
+	@Query(value = "{billAmt:{$gte:?0,$lte:?1}}",exists = true)
+	public boolean areThereCustomersWithBillAmountRange(Double start, Double end);
 
 }
 
 
+/*
+ 	Starting with given data: ^data
+ 	Ending with given data: data$
+ 	Having data: data or ^input$(it is not working in some version of Mongo DB
+ 	
+ 	Mongo DB Documentation: https://docs.mongodb.com/manual/tutorial/query-documents/
+ * */

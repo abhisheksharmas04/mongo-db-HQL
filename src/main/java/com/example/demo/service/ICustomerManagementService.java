@@ -5,6 +5,6 @@ import java.util.List;
 import com.example.demo.document.Customer;
 
 public interface ICustomerManagementService {
-	public List<Object[]> fetchCustomersDataByAddress(String address);
-	public List<Customer>fetchCustomerByCadd(String address);
+	public List<Customer>fetchCUstomerByRegCadd(String cadd);
+	public int fetchCustomerByBillAmountRange(Double start, Double end);
 }
